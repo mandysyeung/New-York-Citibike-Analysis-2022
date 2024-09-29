@@ -9,6 +9,7 @@ from keplergl import KeplerGl
 from datetime import datetime as dt 
 from PIL import Image
 import os
+import gdown
 
 st.set_page_config(page_title='New York Citibike Dashboard', layout='wide')
 
@@ -19,7 +20,12 @@ page = st.sidebar.selectbox(
 )
 
 ####################### Import data #########################################
-df = pd.read_csv('cleaned_citibike_weather_final.csv')
+# Load dataset from Google Drive
+url = 'https://drive.google.com/file/d/1sbYN0BLv_8-LH70QxgWeVU5OPEXOnA76/view?usp=sharing'
+output = 'cleaned_citibike_weather_final.csv'
+gdown.download(url, output, quiet=False)
+df = pd.read_csv(output)
+
 
 df['date'] = pd.to_datetime(df['date'])
 
