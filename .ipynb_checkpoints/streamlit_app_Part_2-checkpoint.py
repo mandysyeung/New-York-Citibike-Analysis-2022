@@ -6,11 +6,9 @@ import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 from streamlit_keplergl import keplergl_static 
 from keplergl import KeplerGl
-from datetime import datetime as dt 
 from PIL import Image
-import os
-import gdown
 import gcsfs
+
 
 st.set_page_config(page_title='New York Citibike Dashboard', layout='wide')
 
@@ -21,10 +19,7 @@ page = st.sidebar.selectbox(
 )
 
 ####################### Import data #########################################
-fs = gcsfs.GCSFileSystem(project='citibike-analysis-2022')  
-bucket_path = 'my-dataset-bucket-analysis/cleaned_citibike_weather_final.csv'
-with fs.open(f'gs://{bucket_path}') as file:
-    df = pd.read_csv(file)
+df = pd.read_csv('reduced_data_under_25MB.csv')
 
 df['date'] = pd.to_datetime(df['date'])
 
