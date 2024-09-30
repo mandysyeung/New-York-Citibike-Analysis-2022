@@ -8,3 +8,4 @@ numpy
 pandas
 gdown
 gcsfs
+google-auth
