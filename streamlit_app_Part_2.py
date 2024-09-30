@@ -24,11 +24,22 @@ page = st.sidebar.selectbox(
 url = 'https://drive.google.com/file/d/1sbYN0BLv_8-LH70QxgWeVU5OPEXOnA76'
 output = 'cleaned_citibike_weather_final.csv'
 if not os.path.exists(output):
-    st.write("Downloading the dataset from Google Drive...")
+    st.write("Dataset not found locally. Downloading from Google Drive...")
+    try:
     gdown.download(url, output, quiet=False)
     st.write("Download complete.")
+    except Exception as e:
+        st.error(f"Failed to download the dataset: {e}")
     else:
     st.write("Dataset already exists locally.")
+try:
+    df = pd.read_csv(output)
+    st.write("Dataset loaded successfully.")
+except FileNotFoundError:
+    st.error(f"File '{output}' not found.")
+except pd.errors.ParserError:
+    st.error(f"Error parsing '{output}'. The file may be corrupted or not a valid CSV.")
+
 st.write("Loading the dataset...")
 df = pd.read_csv(output)
 st.write("Dataset loaded successfully.")
