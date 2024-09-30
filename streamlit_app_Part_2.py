@@ -23,8 +23,8 @@ page = st.sidebar.selectbox(
 # Load dataset from Google Drive
 url = 'https://drive.google.com/uc?id=1sbYN0BLv_8-LH70QxgWeVU5OPEXOnA76'
 output = 'cleaned_citibike_weather_final.csv'
-gdown.download(url, output, quiet=False)
-   
+if not os.path.exists(output):
+    gdown.download(url, output, quiet=False)
 df = pd.read_csv(output)
 df['date'] = pd.to_datetime(df['date'])
 
