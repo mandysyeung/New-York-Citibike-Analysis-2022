@@ -21,10 +21,9 @@ page = st.sidebar.selectbox(
 )
 
 ####################### Import data #########################################
-fs = gcsfs.GCSFileSystem(project='Citibike-Analysis-2022')
-bucket_path = 'my-dataset-bucket-analysis/cleaned_citibike_weather_final.csv'
-with fs.open(f'gs://{bucket_path}') as file:
-    df = pd.read_csv(file)
+url = 'https://storage.googleapis.com/my-dataset-bucket-analysis/cleaned_citibike_weather_final.csv'
+df = pd.read_csv(url)
+
 df['date'] = pd.to_datetime(df['date'])
 
 
