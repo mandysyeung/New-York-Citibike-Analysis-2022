@@ -21,7 +21,7 @@ page = st.sidebar.selectbox(
 
 ####################### Import data #########################################
 # Load dataset from Google Drive
-url = 'https://drive.google.com/file/d/1sbYN0BLv_8-LH70QxgWeVU5OPEXOnA76/view?usp=sharing'
+url = 'https://drive.google.com/file/d/1sbYN0BLv_8-LH70QxgWeVU5OPEXOnA76'
 output = 'cleaned_citibike_weather_final.csv'
 if not os.path.exists(output):
     st.write("Downloading the dataset...")
