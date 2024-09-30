@@ -22,6 +22,5 @@ This project provides an interactive dashboard for analyzing Citibike data in Ne
 ## Dataset Information
 The dataset used for this project contains Citibike ride data from 2022, including information about ride start and end times, stations, and weather data. Due to the large size of the dataset (~1.5 GB), it is hosted on Google Cloud Storage.
 
-### Google Cloud Storage Access
-The dataset can be accessed using Google Cloud Storage through the provided link. In the code, make sure you have the appropriate credentials set up to access the bucket.
+
 
