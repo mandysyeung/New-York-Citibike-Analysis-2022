@@ -6,11 +6,9 @@ import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 from streamlit_keplergl import keplergl_static 
 from keplergl import KeplerGl
-from datetime import datetime as dt 
 from PIL import Image
-import os
-import gdown
 import gcsfs
+
 
 st.set_page_config(page_title='New York Citibike Dashboard', layout='wide')
 
