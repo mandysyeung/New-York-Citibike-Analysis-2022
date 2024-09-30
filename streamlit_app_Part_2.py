@@ -10,6 +10,7 @@ from datetime import datetime as dt
 from PIL import Image
 import os
 import gdown
+import gcsfs
 
 st.set_page_config(page_title='New York Citibike Dashboard', layout='wide')
 
@@ -20,12 +21,10 @@ page = st.sidebar.selectbox(
 )
 
 ####################### Import data #########################################
-# Load dataset from Google Drive
-url = 'https://drive.google.com/uc?id=1sbYN0BLv_8-LH70QxgWeVU5OPEXOnA76'
-output = 'cleaned_citibike_weather_final.csv'
-if not os.path.exists(output):
-    gdown.download(url, output, quiet=False)
-df = pd.read_csv(output)
+fs = gcsfs.GCSFileSystem(project='Citibike-Analysis-2022')
+bucket_path = 'my-dataset-bucket-analysis/cleaned_citibike_weather_final.csv'
+with fs.open(f'gs://{bucket_path}') as file:
+    df = pd.read_csv(file)
 df['date'] = pd.to_datetime(df['date'])
 
 

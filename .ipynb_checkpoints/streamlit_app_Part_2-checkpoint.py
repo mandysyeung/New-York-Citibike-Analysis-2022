@@ -10,6 +10,7 @@ from datetime import datetime as dt
 from PIL import Image
 import os
 import gdown
+import gcsfs
 
 st.set_page_config(page_title='New York Citibike Dashboard', layout='wide')
 
@@ -20,19 +21,10 @@ page = st.sidebar.selectbox(
 )
 
 ####################### Import data #########################################
-# Load dataset from Google Drive
-url = 'https://drive.google.com/file/d/1sbYN0BLv_8-LH70QxgWeVU5OPEXOnA76'
-output = 'cleaned_citibike_weather_final.csv'
-if not os.path.exists(output):
-    st.write("Downloading the dataset from Google Drive...")
-    gdown.download(url, output, quiet=False)
-    st.write("Download complete.")
-    else:
-    st.write("Dataset already exists locally.")
-st.write("Loading the dataset...")
-df = pd.read_csv(output)
-st.write("Dataset loaded successfully.")
-
+fs = gcsfs.GCSFileSystem(project='Citibike-Analysis-2022')
+bucket_path = 'my-dataset-bucket-analysis/cleaned_citibike_weather_final.csv'
+with fs.open(f'gs://{bucket_path}') as file:
+    df = pd.read_csv(file)
 df['date'] = pd.to_datetime(df['date'])
 
 
@@ -41,7 +33,7 @@ df['date'] = pd.to_datetime(df['date'])
 # Introduction Page
 if page == "Introduction":
     st.title("New York Citibike Data Dashboard")
-    myImage = Image.open("C:/Users/msyeu/OneDrive/Pictures/istockphoto-504748828-612x612.jpg")
+    myImage = Image.open("images/istockphoto-504748828-612x612.jpg")
     st.image(myImage, caption="New York Citi Bikes", use_column_width=True)
     st.markdown("This dashboard provides insights on bike rides and temperature trends in New York City during 2022.")
     st.markdown("""
