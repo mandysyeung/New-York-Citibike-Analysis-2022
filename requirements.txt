@@ -1,11 +1,10 @@
-plotly 
-streamlit 
-matplotlib 
+plotly
+streamlit
+matplotlib
 streamlit_keplergl
-numerize 
-pillow 
+pillow
 numpy
 pandas
-gdown
 gcsfs
 google-auth
+
