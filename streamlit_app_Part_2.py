@@ -34,7 +34,7 @@ df['date'] = pd.to_datetime(df['date'])
 # Introduction Page
 if page == "Introduction":
     st.title("New York Citibike Data Dashboard")
-    myImage = Image.open("C:/Users/msyeu/OneDrive/Pictures/istockphoto-504748828-612x612.jpg")
+    myImage = Image.open("images/istockphoto-504748828-612x612.jpg")
     st.image(myImage, caption="New York Citi Bikes", use_column_width=True)
     st.markdown("This dashboard provides insights on bike rides and temperature trends in New York City during 2022.")
     st.markdown("""
