@@ -23,9 +23,15 @@ page = st.sidebar.selectbox(
 # Load dataset from Google Drive
 url = 'https://drive.google.com/file/d/1sbYN0BLv_8-LH70QxgWeVU5OPEXOnA76/view?usp=sharing'
 output = 'cleaned_citibike_weather_final.csv'
-gdown.download(url, output, quiet=False)
+if not os.path.exists(output):
+    st.write("Downloading the dataset...")
+    gdown.download(url, output, quiet=False)
+    st.write("Download complete.")
+    else:
+    st.write("Dataset already exists locally.")
+st.write("Loading the dataset...")
 df = pd.read_csv(output)
-
+st.write("Dataset loaded successfully.")
 
 df['date'] = pd.to_datetime(df['date'])
 
